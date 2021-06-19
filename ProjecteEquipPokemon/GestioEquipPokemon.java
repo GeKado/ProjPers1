@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class GestioEquipPokemon {
 	//Pas 1: Variables per poder fer la gestió dels fitxers
+	private Scanner lectorFitxer;
 	private Scanner lector;
 	private File fitxer;
 	private String nomFitxer;
@@ -24,19 +25,14 @@ public class GestioEquipPokemon {
 	}	
 	
 	//Pas 4: Mètodes de la classe
-	public boolean obrirFitxer(/*boolean lectura*/) {
+	public boolean obrirFitxer() {
 		//Pas 1 M1: Variable
 		boolean obertura = true;
 		
 		//Pas 2 M1: Obrir fitxer
 		try {
 			this.fitxer = new File(nomFitxer);
-			/*if(lectura ==  true) {*/
-				lector = new Scanner(fitxer);
-			/*}
-			else {
-				ps = new PrintStream(fOrigen);
-			}*/
+			lectorFitxer = new Scanner(fitxer);
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
@@ -49,36 +45,34 @@ public class GestioEquipPokemon {
 	public char menuPrincipal() {
 		//Pas 1 M2: Variables
 		char opcio;
-		Scanner lector = new Scanner(System.in);
+		lector = new Scanner(System.in);
 		
 		//Pas 2 M2: Impressió menú
-		System.out.println("Benvingut al creador d'equips Pokemon");
 		System.out.println("Seleccioni una opció:");
-		System.out.println("Nou pokemon (N)");
 		System.out.println("Mirar l'equip (M)");
+		System.out.println("Nou pokemon (N)");
 		System.out.println("Esborrar un pokemon (D)");
 		System.out.println("Surtir (E)");
 		opcio = lector.next().charAt(0);
 		return opcio;
 	}
 	
-	public pokemon nouPokemon() {
-		//Pas 1 M2: Variables
+	public pokemon nouPokemon(int posicio) {
+		//Pas 1 M3: Variables
 		String nom = "";
 		String tipo1 = "";
 		String tipo2 = "";
-		int HP = 0;
-		int Atk = 0;
-		int Def = 0;
-		int SpA = 0;
-		int SpD = 0;
-		int Spe = 0;
-		int posicio = 0;
+		String Lvl = "1";
+		String HP = "0";
+		String Atk = "0";
+		String Def = "0";
+		String SpA = "0";
+		String SpD = "0";
+		String Spe = "0";
 		pokemon pokemon = new pokemon();
 		
-		//Pas 2 M2: Buscar una posició per asignar a un pokémon
-		posicio = buscarPosicioLliure();
-		if(posicio == -1) {
+		//Pas 2 M3: Buscar una posició per asignar a un pokémon
+		if(posicio == 6) {
 			System.out.println("L'equip ja està complet, per això no és pot afegir cap més Pokémon");
 		}
 		//Nota 1: Si hi ha una posició lliure, introduir les dades i assignar-les a un nou pokemon
@@ -95,44 +89,55 @@ public class GestioEquipPokemon {
 			}
 			pokemon.setTipo1(tipo1);
 			pokemon.setTipo2(tipo2);
+			System.out.println("Nivell del Pokémon:");
+			Lvl = lector.next();
+			pokemon.setLvl(Lvl);
 			System.out.println("Punts de vida del Pokémon:");
-			HP = lector.nextInt();
+			HP = lector.next();
 			pokemon.setHP(HP);
 			System.out.println("Atac del Pokémon:");
-			Atk = lector.nextInt();
+			Atk = lector.next();
 			pokemon.setAtk(Atk);
 			System.out.println("Defensa del Pokémon:");
-			Def = lector.nextInt();
+			Def = lector.next();
 			pokemon.setDef(Def);
 			System.out.println("Atac especial del Pokémon:");
-			SpA = lector.nextInt();
+			SpA = lector.next();
 			pokemon.setSpA(SpA);
 			System.out.println("Defensa especial del Pokémon:");
-			SpD = lector.nextInt();
+			SpD = lector.next();
 			pokemon.setSpD(SpD);
 			System.out.println("Velocitat del Pokémon:");
-			Spe = lector.nextInt();
+			Spe = lector.next();
 			pokemon.setSpe(Spe);
 		}
 		return pokemon;
 	}
 	
-	public int buscarPosicioLliure() {
-		//Pas 1 M3: Variables
-		int pos = -1;
-		int index = 0;
-		boolean trobada = false;
+	public pokemon[] llegirPokemons() {
+		//Pas 1 M4: Variables
+		pokemon[] p = null;
+		Scanner lectorPoke = null;
+		int pos = 0;
 		
-		//Pas 2 M3: Buscar una posició que estigui lliure
-		while(trobada == false && index < 6) {
-			if(arrayPoke[index] != null) {
-				index++;
-			}
-			else {
-				trobada = true;
-				pos = index;
-			}
+		//Pas 2 M4: Llegir tots els pokémons;
+		try {
+			lectorPoke = new Scanner(fitxer);
+			p = new pokemon[6];
 		}
-		return pos;
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		while(lectorPoke.hasNext()) {
+			String text = lectorPoke.nextLine();
+			String[] dades = text.split(",");
+			pokemon poke = new pokemon(dades[0], dades[1], dades[2], dades[3], dades[4], dades[5], dades[6], dades[7], dades[8], dades[9]);
+			p[pos] = poke;
+			pos++;
+		}
+		return p;
 	}
+	
+	
 }

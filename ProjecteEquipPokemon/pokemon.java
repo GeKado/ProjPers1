@@ -4,29 +4,29 @@ public class pokemon {
 	private String nom = "";
 	private String tipo1 = "";
 	private String tipo2 = "";
-	private int Lvl = 1;
-	private int HP = 0;
-	private int Atk = 0;
-	private int Def = 0;
-	private int SpA = 0;
-	private int SpD = 0;
-	private int Spe = 0;
+	private String Lvl = "1";
+	private String HP = "0";
+	private String Atk = "0";
+	private String Def = "0";
+	private String SpA = "0";
+	private String SpD = "0";
+	private String Spe = "0";
 	
 	//Pas 2 : Constructors
 	public pokemon() {
 		this.nom = "";
 		this.tipo1 = "";
 		this.tipo2 = "";
-		this.Lvl = 1;
-		this.HP = 0;
-		this.Atk = 0;
-		this.Def = 0;
-		this.SpA = 0;
-		this.SpD = 0;
-		this.Spe = 0;
+		this.Lvl = "1";
+		this.HP = "0";
+		this.Atk = "0";
+		this.Def = "0";
+		this.SpA = "0";
+		this.SpD = "0";
+		this.Spe = "0";
 	}
 	
-	public pokemon(String nom, String tipo1, String tipo2, int Lvl, int HP, int Atk, int Def, int SpA, int SpD, int Spe) {
+	public pokemon(String nom, String tipo1, String tipo2, String Lvl, String HP, String Atk, String Def, String SpA, String SpD, String Spe) {
 		this.nom = nom;
 		this.tipo1 = tipo1;
 		this.tipo2 = tipo2;
@@ -64,59 +64,76 @@ public class pokemon {
 		this.tipo2 = tipo2;
 	}
 
-	public int getLvl() {
+	public String getLvl() {
 		return Lvl;
 	}
 
-	public void setLvl(int lvl) {
+	public void setLvl(String lvl) {
 		Lvl = lvl;
 	}
 
-	public int getHP() {
+	public String getHP() {
 		return HP;
 	}
 
-	public void setHP(int hP) {
+	public void setHP(String hP) {
 		HP = hP;
 	}
 
-	public int getAtk() {
+	public String getAtk() {
 		return Atk;
 	}
 
-	public void setAtk(int atk) {
+	public void setAtk(String atk) {
 		Atk = atk;
 	}
 
-	public int getDef() {
+	public String getDef() {
 		return Def;
 	}
 
-	public void setDef(int def) {
+	public void setDef(String def) {
 		Def = def;
 	}
 
-	public int getSpA() {
+	public String getSpA() {
 		return SpA;
 	}
 
-	public void setSpA(int spA) {
+	public void setSpA(String spA) {
 		SpA = spA;
 	}
 
-	public int getSpD() {
+	public String getSpD() {
 		return SpD;
 	}
 
-	public void setSpD(int spD) {
+	public void setSpD(String spD) {
 		SpD = spD;
 	}
 
-	public int getSpe() {
+	public String getSpe() {
 		return Spe;
 	}
 
-	public void setSpe(int spe) {
+	public void setSpe(String spe) {
 		Spe = spe;
+	}
+	
+	public String toString() {
+		String dades = "";
+		//dades = this.nom + ", " + this.tipo1 + ", " + this.tipo2 + ", " + this.Lvl + ", " + this.HP + ", " + this.Atk + ", " + this.Def + ", " + this.SpA + ", " + this.SpD + ", " + this.Spe;
+		dades = "Estadístiques del pokémon:";
+		dades = "Nom del pokémon: " + this.nom + "\n";
+		dades = dades + "Primer tipo: " + this.tipo1 + "\n";
+		dades = dades + "Segon tipo: " + this.tipo2 + "\n";
+		dades = dades + "Nivell del pokémon: " + this.Lvl + "\n";
+		dades = dades + "Vida del pokémon: " + this.HP + "\n";
+		dades = dades + "Atac del pokémom: " + this.Atk + "\n";
+		dades = dades + "Defensa del pokémom: " + this.Def + "\n";
+		dades = dades + "Atac especial del pokémom: " + this.SpA + "\n";
+		dades = dades + "Defensa especial del pokémom: " + this.SpD + "\n";
+		dades = dades + "Velocitat del pokémom: " + this.Spe + "\n";
+		return dades;
 	}
 }
